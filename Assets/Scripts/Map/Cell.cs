@@ -8,6 +8,13 @@ public class Cell : MonoBehaviour
     public LineRenderer left;
     public LineRenderer right;
 
+    public Color normalColor = new Color(1f, 1f, 1f, 0f);
+    public Color pointedColor = new Color(1f, 1f, 0f, 0.5f);
+    public Color selectedColor = new Color(1f, 0f, 0f, 0.6f);
+    private Renderer surfaceRenderer;
+    private bool isPointed;
+    private bool isSelected;
+
     private float size;
     private Terrain terrain;
 
@@ -17,6 +24,8 @@ public class Cell : MonoBehaviour
     void Start()
     {
         SetupCell();
+
+        surfaceRenderer = surface.GetComponent<MeshRenderer>();
     }
 
     public void Initialize(float size, Terrain terrain, Vector2Int coordinates)
@@ -26,6 +35,34 @@ public class Cell : MonoBehaviour
         Coordinates = coordinates;
 
         name = "Cell (" + coordinates.x + ", " + coordinates.y + ")"; 
+    }
+
+    public void OnPoint(bool active)
+    {
+        isPointed = active;
+        UpdateColor();
+    }
+
+    public void OnSelect(bool active)
+    {
+        isSelected = active;
+        UpdateColor();
+    }
+
+    private void UpdateColor()
+    {
+        if (isSelected)
+        {
+            surfaceRenderer.material.color = selectedColor;
+        }
+        else if (isPointed)
+        {
+            surfaceRenderer.material.color = pointedColor;
+        }
+        else
+        {
+            surfaceRenderer.material.color = normalColor;
+        }
     }
 
     private void SetupCell()
@@ -53,6 +90,7 @@ public class Cell : MonoBehaviour
         surface.SetLocalPositionAndRotation(
             Vector3.up * 0.01f,
             Quaternion.Euler(90f, 0f, 0f));
+        surface.localRotation = Quaternion.Euler(90f, 0f, 0f);
         surface.localScale = new Vector3(size, size, 1f);
     }
 
