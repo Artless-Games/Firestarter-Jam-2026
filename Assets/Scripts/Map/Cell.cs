@@ -16,9 +16,13 @@ public class Cell : MonoBehaviour
     private bool isSelected;
 
     private float size;
-    private Terrain terrain;
 
     public Vector2Int Coordinates { get; private set; }
+    public float TerrainHeight { get; private set; }
+    public bool IsBuildable { get; private set; }
+    public Building Building { get; set; }
+
+    public bool HasBuilding => Building != null;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,13 +32,15 @@ public class Cell : MonoBehaviour
         surfaceRenderer = surface.GetComponent<MeshRenderer>();
     }
 
-    public void Initialize(float size, Terrain terrain, Vector2Int coordinates)
+    public void Initialize(float size, Vector2Int coordinates, Terrain terrain, bool isBuildable)
     {
         this.size = size;
-        this.terrain = terrain;
         Coordinates = coordinates;
+        TerrainHeight = terrain.SampleHeight(transform.position)
+            + terrain.transform.position.y;
+        IsBuildable = isBuildable;
 
-        name = "Cell (" + coordinates.x + ", " + coordinates.y + ")"; 
+        name = "Cell (" + coordinates.x + ", " + coordinates.y + ")";
     }
 
     public void OnPoint(bool active)
@@ -47,6 +53,11 @@ public class Cell : MonoBehaviour
     {
         isSelected = active;
         UpdateColor();
+    }
+
+    public void RemoveBuilding()
+    {
+        Building = null;
     }
 
     private void UpdateColor()
@@ -74,15 +85,9 @@ public class Cell : MonoBehaviour
 
     private void SetupHeight()
     {
-        float height = terrain.SampleHeight(transform.position)
-                       + terrain.transform.position.y
-                       + 0.1f;
-
-        transform.position = new Vector3(
-            transform.position.x,
-            height,
-            transform.position.z
-        );
+        Vector3 position = transform.position;
+        position.y = TerrainHeight + 0.05f;
+        transform.position = position;
     }
 
     private void SetupSurface()

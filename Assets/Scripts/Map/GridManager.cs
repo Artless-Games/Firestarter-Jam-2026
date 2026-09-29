@@ -1,20 +1,43 @@
 using UnityEngine;
 
-public class MapManager : MonoBehaviour
+public class GridManager : MonoBehaviour
 {
     public Terrain terrain;
-    public Grid grid;
     public Cell cellPrefab;
 
     public int width = 5;
     public int height = 5;
     public float cellSize = 5f;
 
+    private Grid grid;
     private Cell[,] cells;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int BuildableCellCount
     {
+        get
+        {
+            int count = 0;
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int z = 0; z < height; z++)
+                {
+                    Cell cell = cells[x, z];
+
+                    if (cell != null && cell.IsBuildable)
+                        count++;
+                }
+            }
+
+            return count;
+        }
+    }
+
+    private void Awake()
+    {
+        grid = GetComponent<Grid>();
+        grid.cellSize = new Vector3(cellSize, cellSize, grid.cellSize.z);
+
         GenerateGrid();
     }
 
@@ -30,18 +53,17 @@ public class MapManager : MonoBehaviour
     {
         Vector3Int cellPosition = new Vector3Int(
             cell.Coordinates.x,
-            0,
-            cell.Coordinates.y
+            cell.Coordinates.y,
+            0
         );
 
         Vector3 worldPosition = grid.GetCellCenterWorld(cellPosition);
-        worldPosition.y = terrain.SampleHeight(worldPosition)
-            + terrain.transform.position.y;
+        worldPosition.y = cell.TerrainHeight;
 
         return worldPosition;
     }
 
-    private Cell GetCell(Vector2Int coordinates)
+    public Cell GetCell(Vector2Int coordinates)
     {
         if (!IsInsideGrid(coordinates))
             return null;
@@ -75,10 +97,10 @@ public class MapManager : MonoBehaviour
                     cellPrefab,
                     position,
                     Quaternion.identity,
-                    grid.transform
+                    transform
                 );
 
-                cell.Initialize(cellSize, terrain, new Vector2Int(x, z));
+                cell.Initialize(cellSize, new Vector2Int(x, z), terrain, true);
 
                 cells[x, z] = cell;
             }

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class GridInput : MonoBehaviour
 {
-    public MapManager mapManager;
+    public GridManager gridManager;
     public LayerMask gridLayer;
 
     private Cell currentPointedCell;
@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, gridLayer))
         {
-            newCell = mapManager.WorldToCell(hit.point);
+            newCell = gridManager.WorldToCell(hit.point);
         }
 
         if (newCell == currentPointedCell)
@@ -66,5 +66,7 @@ public class InputManager : MonoBehaviour
 
         selectedCell = currentPointedCell;
         selectedCell.OnSelect(true);
+
+        // Apply effect
     }
 }
