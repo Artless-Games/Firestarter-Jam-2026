@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class GridInput : MonoBehaviour
 {
+    public InputManager inputManager;
     public GridManager gridManager;
     public LayerMask gridLayer;
 
@@ -67,6 +68,7 @@ public class GridInput : MonoBehaviour
         selectedCell = currentPointedCell;
         selectedCell.OnSelect(true);
 
-        // Apply effect
+        GameManager.Instance.SelectedCell = selectedCell;
+        GameManager.Instance.TryPlayCard();
     }
 }
