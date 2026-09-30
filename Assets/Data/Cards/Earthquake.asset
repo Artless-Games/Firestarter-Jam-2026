@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Earthquake
   m_EditorClassIdentifier: Assembly-CSharp::CardData
   cardName: Earthquake
-  artwork: {fileID: 0}
+  image: {fileID: 0}
+  description: 
+  cost: 0
+  damage: 50
   target: {fileID: 11400000, guid: 0759cca6ef5f37e4ba277fb0798a4f72, type: 2}
-  effect: {fileID: 11400000, guid: 6bab9fdb1d7614847b5dba9d9fc9f036, type: 2}
+  area: {fileID: 11400000, guid: ea9290ed5fe703f4ab60b2f852ac9ec1, type: 2}
+  effects: []

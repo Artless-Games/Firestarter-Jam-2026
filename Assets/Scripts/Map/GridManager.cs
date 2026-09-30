@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    // Singleton
+    public static GridManager Instance { get; private set; }
+
     public Terrain terrain;
     public Cell cellPrefab;
 
@@ -35,6 +38,14 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         grid = GetComponent<Grid>();
         grid.cellSize = new Vector3(cellSize, cellSize, grid.cellSize.z);
 
@@ -100,7 +111,7 @@ public class GridManager : MonoBehaviour
                     transform
                 );
 
-                cell.Initialize(cellSize, new Vector2Int(x, z), terrain, true);
+                cell.Initialize(cellSize, new Vector2Int(x, z), terrain, true, false);
 
                 cells[x, z] = cell;
             }

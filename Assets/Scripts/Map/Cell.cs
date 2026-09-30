@@ -9,10 +9,14 @@ public class Cell : MonoBehaviour
     public LineRenderer right;
 
     public Color normalColor = new Color(1f, 1f, 1f, 0f);
+    public Color highlightedColor = new Color(1f, 1f, 0.5f, 0.4f);
     public Color pointedColor = new Color(1f, 1f, 0f, 0.5f);
-    public Color selectedColor = new Color(1f, 0f, 0f, 0.6f);
+    public Color disallowedColor = new Color(1f, 0f, 0f, 0.5f);
+    public Color selectedColor = new Color(0f, 1f, 0f, 0.6f);
     private Renderer surfaceRenderer;
     private bool isPointed;
+    private bool isHighlighted;
+    private bool isDisallowed;
     private bool isSelected;
 
     private float size;
@@ -20,6 +24,7 @@ public class Cell : MonoBehaviour
     public Vector2Int Coordinates { get; private set; }
     public float TerrainHeight { get; private set; }
     public bool IsBuildable { get; private set; }
+    public bool IsWater { get; private set; }
     public Building Building { get; set; }
 
     public bool HasBuilding => Building != null;
@@ -32,13 +37,14 @@ public class Cell : MonoBehaviour
         surfaceRenderer = surface.GetComponent<MeshRenderer>();
     }
 
-    public void Initialize(float size, Vector2Int coordinates, Terrain terrain, bool isBuildable)
+    public void Initialize(float size, Vector2Int coordinates, Terrain terrain, bool isBuildable, bool isWater)
     {
         this.size = size;
         Coordinates = coordinates;
         TerrainHeight = terrain.SampleHeight(transform.position)
             + terrain.transform.position.y;
         IsBuildable = isBuildable;
+        IsWater = isWater;
 
         name = "Cell (" + coordinates.x + ", " + coordinates.y + ")";
     }
@@ -46,6 +52,18 @@ public class Cell : MonoBehaviour
     public void OnPoint(bool active)
     {
         isPointed = active;
+        UpdateColor();
+    }
+
+    public void OnHighlight(bool active)
+    {
+        isHighlighted = active;
+        UpdateColor();
+    }
+
+    public void OnDisallowed(bool active)
+    {
+        isDisallowed = active;
         UpdateColor();
     }
 
@@ -66,9 +84,17 @@ public class Cell : MonoBehaviour
         {
             surfaceRenderer.material.color = selectedColor;
         }
+        else if (isDisallowed)
+        {
+            surfaceRenderer.material.color = disallowedColor;
+        }
         else if (isPointed)
         {
             surfaceRenderer.material.color = pointedColor;
+        }
+        else if (isHighlighted)
+        {
+            surfaceRenderer.material.color = highlightedColor;
         }
         else
         {

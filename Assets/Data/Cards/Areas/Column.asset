@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f41cc054a9985f4eaf51fbfec8926ce, type: 3}
-  m_Name: Destroy
-  m_EditorClassIdentifier: Assembly-CSharp::DestroyEffect
+  m_Script: {fileID: 11500000, guid: d013d606646a17440bf414f349787747, type: 3}
+  m_Name: Column
+  m_EditorClassIdentifier: Assembly-CSharp::ColumnArea

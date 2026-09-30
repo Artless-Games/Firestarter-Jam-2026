@@ -76,5 +76,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844eb45a4075297479e97bf2d0bc7d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
   pointedHeight: 0.5

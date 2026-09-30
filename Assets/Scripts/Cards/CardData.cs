@@ -1,13 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Cards/Card")]
 public class CardData : ScriptableObject
 {
+    [Header("Identity")]
     public string cardName;
-    public Sprite artwork;
+    public Sprite image;
+    public string description;
+
+    [Header("Gameplay")]
+    public int cost;
+    public int damage;
 
     public CardTarget target;
-    public CardEffect effect;
+    public CardArea area;
+
+    public List<CardEffect> effects = new();
 
     public bool CanTarget(Cell cell)
     {
@@ -19,6 +28,6 @@ public class CardData : ScriptableObject
         if (!CanTarget(cell))
             return;
 
-        effect.Apply(cell);
+        //effect.Apply(cell);
     }
 }

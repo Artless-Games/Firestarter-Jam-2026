@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 1352935011}
   - component: {fileID: 1352935012}
   - component: {fileID: 1352935013}
+  - component: {fileID: 1352935014}
   m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
@@ -758,6 +759,18 @@ MonoBehaviour:
   width: 5
   height: 5
   cellSize: 5
+--- !u!114 &1352935014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352935010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68098f30c1c45a048baea3d7b0be6fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridHighlight
 --- !u!1 &1379829686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac35a1f53c98d342b3f2eec25632f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gridManager: {fileID: 1352935013}
+  gridHighlight: {fileID: 1352935014}
   card: {fileID: 6164666391289912263, guid: 5ac83facae0430d4f8c6fcd195270dcb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

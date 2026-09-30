@@ -1,8 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // Singleton
     public static GameManager Instance { get; private set; }
+
+    public GridManager gridManager;
+    public GridHighlight gridHighlight;
+
+    private Cell pointedCell;
+    private Cell selectedCell;
+    public Card card;
+
+    public Card SelectedCard { get; set; }
 
     private void Awake()
     {
@@ -13,22 +24,70 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        SelectedCard = card;
     }
 
-    public Card SelectedCard { get; set; }
-    public Cell SelectedCell { get; set; }
-
-    public void TryPlayCard()
+    public void PointCell(Cell cell)
     {
-        if (SelectedCard == null || SelectedCell == null)
+        if (SelectedCard == null)
             return;
 
-        if (!SelectedCard.data.CanTarget(SelectedCell))
+        if (pointedCell == cell)
             return;
 
-        SelectedCard.data.ApplyEffect(SelectedCell);
+        pointedCell = cell;
+
+        if (!SelectedCard.data.target.CanTarget(cell))
+        {
+            gridHighlight.ShowDisallowed(cell);
+            return;
+        }
+
+        List<Cell> cells =
+            SelectedCard.data.area.GetCells(cell);
+
+        gridHighlight.ShowHighlight(cell, cells);
+    }
+
+    public void ClearCellHighlight()
+    {
+        pointedCell = null;
+        gridHighlight.ClearHighlighted();
+    }
+
+    public void SelectPointedCell()
+    {
+        if (SelectedCard == null)
+            return;
+
+        if (pointedCell == null)
+            return;
+
+        if (!SelectedCard.data.target.CanTarget(pointedCell))
+            return;
+
+        selectedCell = pointedCell;
+
+        List<Cell> cells =
+            SelectedCard.data.area.GetCells(selectedCell);
+
+        gridHighlight.ShowSelected(cells);
+
+        TryPlayCard();
+    }
+
+    private void TryPlayCard()
+    {
+        if (SelectedCard == null || selectedCell == null)
+            return;
+
+        if (!SelectedCard.data.CanTarget(selectedCell))
+            return;
+
+        SelectedCard.data.ApplyEffect(selectedCell);
 
         SelectedCard = null;
-        SelectedCell = null;
+        pointedCell = null;
+        selectedCell = null;
     }
 }
