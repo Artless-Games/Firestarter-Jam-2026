@@ -5,6 +5,7 @@ public class Building : MonoBehaviour
     public int health = 100;
 
     public Cell Cell { get; private set; }
+
     private BuildingManager buildingManager;
 
     public void Initialize(Cell cell, BuildingManager buildingManager)
@@ -21,7 +22,7 @@ public class Building : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            DestroyBuilding();
         }
     }
 
@@ -30,11 +31,13 @@ public class Building : MonoBehaviour
         if (Cell != null)
         {
             Cell.RemoveBuilding();
+            Cell = null;
         }
 
         if (buildingManager != null)
         {
             buildingManager.RemoveBuilding(this);
+            buildingManager = null;
         }
 
         Destroy(gameObject);

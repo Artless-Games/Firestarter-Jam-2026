@@ -29,12 +29,15 @@ public class Cell : MonoBehaviour
 
     public bool HasBuilding => Building != null;
 
+    private void Awake()
+    {
+        surfaceRenderer = surface.GetComponent<MeshRenderer>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SetupCell();
-
-        surfaceRenderer = surface.GetComponent<MeshRenderer>();
     }
 
     public void Initialize(float size, Vector2Int coordinates, Terrain terrain, bool isBuildable, bool isWater)

@@ -6,14 +6,19 @@ public class GameManager : MonoBehaviour
     // Singleton
     public static GameManager Instance { get; private set; }
 
-    public GridManager gridManager;
+    public CardHand cardHand;
+    public CardHighlight cardHighlight;
+    public GridInput gridInput;
     public GridHighlight gridHighlight;
+    public CameraController cameraController;
 
+    private Card pointedCard;
+    private Card draggedCard;
     private Cell pointedCell;
     private Cell selectedCell;
-    public Card card;
 
-    public Card SelectedCard { get; set; }
+    public bool IsDraggingCard => draggedCard != null;
+
 
     private void Awake()
     {
@@ -24,12 +29,105 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        SelectedCard = card;
+    }
+
+    public void PointCard(Card card)
+    {
+        if (pointedCard == card)
+            return;
+
+        pointedCard = card;
+
+        if (pointedCard != null)
+        {
+            cardHand.PointCard(pointedCard);
+            cardHighlight.ShowPointed(pointedCard);
+        }
+        else
+        {
+            cardHand.ClearPointedCard();
+            cardHighlight.ClearPointed();
+        }
+    }
+
+    public void ClearPointedCard()
+    {
+        pointedCard = null;
+
+        cardHand.ClearPointedCard();
+        cardHighlight.ClearPointed();
+    }
+
+    public void BeginCardDrag(Card card)
+    {
+        if (card == null)
+            return;
+
+        draggedCard = card;
+        card.OnDragging(true);
+        card.BeginDragVisual();
+
+        cardHand.ClearPointedCard();
+        cardHighlight.ClearPointed();
+
+        cardHand.SetDraggedCard(card);
+
+        cameraController.SetDragMode(true);
+    }
+
+    public void DragCard(Vector2 screenPosition)
+    {
+        if (draggedCard == null)
+            return;
+
+        draggedCard.SetDragPosition(screenPosition);
+
+        Cell cell = gridInput.GetPointedCell(screenPosition);
+
+        if (cell != null)
+        {
+            PointCell(cell);
+            return;
+        }
+
+        ClearCellHighlight();
+    }
+
+    public void EndCardDrag(Vector2 screenPosition)
+    {
+        if (draggedCard == null)
+            return;
+
+        Card card = draggedCard;
+
+        if (SelectPointedCell())
+        {
+            TryPlayCard();
+
+            draggedCard = null;
+
+            cameraController.SetDragMode(false);
+            cardHand.ClearDraggedCard();
+
+            CardManager.Instance.RemoveCard(card);
+
+            return;
+        }
+
+        card.OnDragging(false);
+        card.EndDragVisual();
+
+        draggedCard = null;
+
+        ClearCellHighlight();
+
+        cameraController.SetDragMode(false);
+        cardHand.ClearDraggedCard();
     }
 
     public void PointCell(Cell cell)
     {
-        if (SelectedCard == null)
+        if (draggedCard == null)
             return;
 
         if (pointedCell == cell)
@@ -37,14 +135,14 @@ public class GameManager : MonoBehaviour
 
         pointedCell = cell;
 
-        if (!SelectedCard.data.target.CanTarget(cell))
+        if (!draggedCard.data.CanTarget(cell))
         {
             gridHighlight.ShowDisallowed(cell);
             return;
         }
 
         List<Cell> cells =
-            SelectedCard.data.area.GetCells(cell);
+            draggedCard.data.area.GetCells(cell);
 
         gridHighlight.ShowHighlight(cell, cells);
     }
@@ -55,39 +153,35 @@ public class GameManager : MonoBehaviour
         gridHighlight.ClearHighlighted();
     }
 
-    public void SelectPointedCell()
+    private bool SelectPointedCell()
     {
-        if (SelectedCard == null)
-            return;
+        if (draggedCard == null)
+            return false;
 
         if (pointedCell == null)
-            return;
+            return false;
 
-        if (!SelectedCard.data.target.CanTarget(pointedCell))
-            return;
+        if (!draggedCard.data.CanTarget(pointedCell))
+            return false;
 
         selectedCell = pointedCell;
 
         List<Cell> cells =
-            SelectedCard.data.area.GetCells(selectedCell);
+            draggedCard.data.area.GetCells(selectedCell);
 
         gridHighlight.ShowSelected(cells);
 
-        TryPlayCard();
+        return true;
     }
 
     private void TryPlayCard()
     {
-        if (SelectedCard == null || selectedCell == null)
+        if (draggedCard == null || selectedCell == null)
             return;
 
-        if (!SelectedCard.data.CanTarget(selectedCell))
+        if (!draggedCard.data.CanTarget(selectedCell))
             return;
 
-        SelectedCard.data.ApplyEffect(selectedCell);
-
-        SelectedCard = null;
-        pointedCell = null;
-        selectedCell = null;
+        draggedCard.data.ApplyEffect(selectedCell);
     }
 }

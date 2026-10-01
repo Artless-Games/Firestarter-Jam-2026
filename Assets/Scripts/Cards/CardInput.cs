@@ -1,78 +1,49 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
-public class CardInput : MonoBehaviour
+[RequireComponent(typeof(Card))]
+public class CardInput : MonoBehaviour,
+    IPointerEnterHandler,
+    IPointerExitHandler,
+    IBeginDragHandler,
+    IDragHandler,
+    IEndDragHandler
 {
-    public InputManager inputManager;
-    public LayerMask cardLayer;
+    private Card card;
 
-    private Card currentPointedCard;
-    private Card selectedCard;
-
-    public void OnPoint(InputAction.CallbackContext context)
+    private void Awake()
     {
-        if (context.canceled)
-        {
-            if (currentPointedCard != null)
-            {
-                currentPointedCard.OnPoint(false);
-                currentPointedCard = null;
-            }
-
-            return;
-        }
-
-        Vector2 screenPosition = context.ReadValue<Vector2>();
-
-        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-
-        Card newPointedCard = null;
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, cardLayer))
-        {
-            newPointedCard = hit.collider.GetComponent<Card>();
-        }
-
-        if (newPointedCard == currentPointedCard)
-            return;
-
-        if (currentPointedCard != null)
-            currentPointedCard.OnPoint(false);
-
-        currentPointedCard = newPointedCard;
-
-        if (currentPointedCard != null)
-            currentPointedCard.OnPoint(true);
+        card = GetComponent<Card>();
     }
 
-    public void OnSelect(InputAction.CallbackContext context)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!context.performed)
+        if (GameManager.Instance.IsDraggingCard)
             return;
 
-        if (currentPointedCard == null)
+        GameManager.Instance.PointCard(card);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (GameManager.Instance.IsDraggingCard)
             return;
 
-        if (selectedCard == currentPointedCard)
-        {
-            selectedCard.OnSelect(false);
-            selectedCard = null;
-            return;
-        }
+        GameManager.Instance.ClearPointedCard();
+    }
 
-        if (selectedCard != null)
-            selectedCard.OnSelect(false);
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        GameManager.Instance.BeginCardDrag(card);
+    }
 
-        selectedCard = currentPointedCard;
-        selectedCard.OnSelect(true);
+    public void OnDrag(PointerEventData eventData)
+    {
+        GameManager.Instance.DragCard(eventData.position);
+    }
 
-        GameManager.Instance.SelectedCard = selectedCard;
-
-        currentPointedCard.OnPoint(false);
-        currentPointedCard = null;
-
-        inputManager.SetMode(
-            InputManager.InputMode.Grid
-        );
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        GameManager.Instance.EndCardDrag(eventData.position);
     }
 }

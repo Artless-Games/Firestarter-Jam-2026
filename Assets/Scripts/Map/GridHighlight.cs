@@ -4,8 +4,9 @@ using UnityEngine;
 public class GridHighlight : MonoBehaviour
 {
     private Cell pointedCell;
-    private Cell selectedCell;
+
     private readonly List<Cell> highlightedCells = new();
+    private readonly List<Cell> selectedCells = new();
 
     public void ShowHighlight(Cell pointedCell, List<Cell> cells)
     {
@@ -40,10 +41,15 @@ public class GridHighlight : MonoBehaviour
     {
         ClearHighlighted();
 
+        ClearSelected();
+
         foreach (Cell cell in cells)
         {
             if (cell != null)
+            {
                 cell.OnSelect(true);
+                selectedCells.Add(cell);
+            }
         }
     }
 
@@ -65,14 +71,20 @@ public class GridHighlight : MonoBehaviour
         }
     }
 
+    public void ClearSelected()
+    {
+        foreach (Cell cell in selectedCells)
+        {
+            if (cell != null)
+                cell.OnSelect(false);
+        }
+
+        selectedCells.Clear();
+    }
+
     public void Clear()
     {
         ClearHighlighted();
-
-        if (selectedCell != null)
-        {
-            selectedCell.OnSelect(false);
-            selectedCell = null;
-        }
+        ClearSelected();
     }
 }

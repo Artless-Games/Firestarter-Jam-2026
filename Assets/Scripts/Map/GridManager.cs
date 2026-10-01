@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Grid))]
 public class GridManager : MonoBehaviour
 {
     // Singleton

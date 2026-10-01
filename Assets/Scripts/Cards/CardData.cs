@@ -23,11 +23,17 @@ public class CardData : ScriptableObject
         return target != null && target.CanTarget(cell);
     }
 
-    public void ApplyEffect(Cell cell)
+    public void ApplyEffect(Cell origin)
     {
-        if (!CanTarget(cell))
+        if (!CanTarget(origin))
             return;
 
-        //effect.Apply(cell);
+        List<Cell> cells = area.GetCells(origin);
+
+        foreach (CardEffect effect in effects)
+        {
+            if (effect != null)
+                effect.Apply(origin, cells);
+        }
     }
 }

@@ -30,6 +30,12 @@ public class BuildingManager : MonoBehaviour
 
     public void ClearBuildings()
     {
+        foreach (Building building in buildings)
+        {
+            if (building != null)
+                Destroy(building.gameObject);
+        }
+
         buildings.Clear();
     }
 
