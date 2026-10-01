@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba38f86be355eb4b8b70d5cae751806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
-  cardPrefab: {fileID: 742908081726052839, guid: 5ac83facae0430d4f8c6fcd195270dcb, type: 3}
+  cardPrefab: {fileID: 9116690176739423201, guid: 7189064269519d64899831d6e78f87e0, type: 3}
   cardHand: {fileID: 260776896}
   startingCards:
   - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
