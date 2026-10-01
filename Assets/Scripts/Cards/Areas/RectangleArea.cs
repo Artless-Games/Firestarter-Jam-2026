@@ -11,22 +11,26 @@ public class RectangleArea : CardArea
     {
         List<Cell> cells = new();
 
-        int minX = -(width / 2);
-        int maxX = (width - 1) / 2;
+        Vector2Int start = origin.Coordinates;
 
-        int minZ = -(height / 2);
-        int maxZ = (height - 1) / 2;
-
-        Vector2Int center = origin.Coordinates;
-
-        for (int x = minX; x <= maxX; x++)
+        if (height > width)
         {
-            for (int z = minZ; z <= maxZ; z++)
+            start.y -= height / 2;
+        }
+        else
+        {
+            start.x -= width / 2;
+        }
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < height; z++)
             {
                 Vector2Int coordinates =
-                    center + new Vector2Int(x, z);
+                    start + new Vector2Int(x, z);
 
-                Cell cell = GridManager.Instance.GetCell(coordinates);
+                Cell cell =
+                    GridManager.Instance.GetCell(coordinates);
 
                 if (cell != null)
                     cells.Add(cell);
