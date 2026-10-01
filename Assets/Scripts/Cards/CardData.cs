@@ -7,14 +7,14 @@ public class CardData : ScriptableObject
     [Header("Identity")]
     public string cardName;
     public Sprite image;
-    public string description;
 
     [Header("Gameplay")]
     public int cost;
-    public int damage;
+    public DamageData damageData;
 
     public CardTarget target;
     public CardArea area;
+    public CardDamage damageType;
 
     public List<CardEffect> effects = new();
 
@@ -29,6 +29,8 @@ public class CardData : ScriptableObject
             return;
 
         List<Cell> cells = area.GetCells(origin);
+
+        damageType.ApplyDamage(origin, cells, damageData);
 
         foreach (CardEffect effect in effects)
         {
