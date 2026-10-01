@@ -1,12 +1,19 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Building : MonoBehaviour
 {
-    public int health = 100;
-
-    public Cell Cell { get; private set; }
+    public int health = 1;
 
     private BuildingManager buildingManager;
+
+    public Cell Cell { get; private set; }
+    public bool IsOnFire { get; private set; }
+    public int FireDamage { get; private set; }
+    private GameObject fireVfxPrefab;
+    private GameObject fireVfx;
+
+    public GameObject FireVfxPrefab => fireVfxPrefab;
 
     public void Initialize(Cell cell, BuildingManager buildingManager)
     {
@@ -16,14 +23,58 @@ public class Building : MonoBehaviour
         this.buildingManager = buildingManager;
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         health -= damage;
 
         if (health <= 0)
         {
             DestroyBuilding();
+            return true;
         }
+
+        return false;
+    }
+
+    public CardVFX SetOnFire(int damage, GameObject vfxPrefab)
+    {
+        IsOnFire = true;
+        FireDamage = damage;
+        fireVfxPrefab = vfxPrefab;
+
+        return StartFireVFX();
+    }
+
+    public CardVFX StartFireVFX()
+    {
+        if (fireVfx != null)
+            return fireVfx.GetComponent<CardVFX>();
+
+        if (fireVfxPrefab == null)
+            return null;
+
+        fireVfx = Instantiate(
+            fireVfxPrefab,
+            transform.position,
+            Quaternion.identity,
+            transform
+        );
+
+        return fireVfx.GetComponent<CardVFX>();
+    }
+
+    public void Extinguish()
+    {
+        IsOnFire = false;
+        FireDamage = 0;
+
+        if (fireVfx != null)
+        {
+            Destroy(fireVfx);
+            fireVfx = null;
+        }
+
+        fireVfxPrefab = null;
     }
 
     public void DestroyBuilding()

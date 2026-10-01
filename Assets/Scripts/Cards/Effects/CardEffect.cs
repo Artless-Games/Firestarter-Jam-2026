@@ -3,5 +3,10 @@ using UnityEngine;
 
 public abstract class CardEffect : ScriptableObject
 {
-    public abstract void Apply(Cell origin, List<Cell> cells);
+    public abstract void ApplyEffect(
+        Cell origin,
+        List<Cell> cells,
+        DamageData damageData,
+        CardDamage damageType,
+        GameObject vfx);
 }

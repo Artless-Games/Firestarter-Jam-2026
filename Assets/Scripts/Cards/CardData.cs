@@ -4,10 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Cards/Card")]
 public class CardData : ScriptableObject
 {
-    [Header("Identity")]
-    public string cardName;
-    public Sprite image;
-
     [Header("Gameplay")]
     public int cost;
     public DamageData damageData;
@@ -18,24 +14,54 @@ public class CardData : ScriptableObject
 
     public List<CardEffect> effects = new();
 
+    [Header("Presentation")]
+    public GameObject vfx;
+    public AudioClip sfx;
+
     public bool CanTarget(Cell cell)
     {
         return target != null && target.CanTarget(cell);
     }
 
-    public void ApplyEffect(Cell origin)
+    public void Play(Cell origin)
     {
         if (!CanTarget(origin))
             return;
 
         List<Cell> cells = area.GetCells(origin);
 
-        damageType.ApplyDamage(origin, cells, damageData);
+        if (damageType != null && damageData.maxDamage > 0)
+            damageType.ApplyDamage(origin, cells, damageData);
 
         foreach (CardEffect effect in effects)
         {
             if (effect != null)
-                effect.Apply(origin, cells);
+                effect.ApplyEffect(origin, cells, damageData, damageType, vfx);
+        }
+    }
+
+    public void ApplyEffect(Cell origin, GameObject vfx)
+    {
+        if (!CanTarget(origin))
+            return;
+
+        List<Cell> cells = area.GetCells(origin);
+
+        if (damageType != null && damageData.maxDamage > 0)
+            damageType.ApplyDamage(
+                origin,
+                cells,
+                damageData);
+
+        foreach (CardEffect effect in effects)
+        {
+            if (effect != null)
+                effect.ApplyEffect(
+                    origin,
+                    cells,
+                    damageData,
+                    damageType,
+                    vfx);
         }
     }
 }

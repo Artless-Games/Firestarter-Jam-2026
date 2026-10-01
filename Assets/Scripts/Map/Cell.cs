@@ -23,7 +23,7 @@ public class Cell : MonoBehaviour
 
     public Vector2Int Coordinates { get; private set; }
     public float TerrainHeight { get; private set; }
-    public bool IsBuildable { get; private set; }
+    public bool IsBuildable { get; set; }
     public bool IsWater { get; private set; }
     public Building Building { get; set; }
 

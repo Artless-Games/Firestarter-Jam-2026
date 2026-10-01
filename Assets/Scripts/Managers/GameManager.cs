@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private Cell selectedCell;
 
     public bool IsDraggingCard => draggedCard != null;
+    public bool IsPlayingCard { get; private set; }
 
 
     private void Awake()
@@ -29,6 +30,12 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        CardPlayer.Instance.Finished += OnCardFinished;
     }
 
     public void PointCard(Card card)
@@ -98,24 +105,22 @@ public class GameManager : MonoBehaviour
         if (draggedCard == null)
             return;
 
-        Card card = draggedCard;
-
         if (SelectPointedCell())
         {
             TryPlayCard();
-
-            draggedCard = null;
-
-            cameraController.SetDragMode(false);
-            cardHand.ClearDraggedCard();
-
-            CardManager.Instance.RemoveCard(card);
-
             return;
         }
 
-        card.OnDragging(false);
-        card.EndDragVisual();
+        ClearDraggedCard();
+    }
+
+    private void ClearDraggedCard()
+    {
+        if (draggedCard == null)
+            return;
+
+        draggedCard.OnDragging(false);
+        draggedCard.EndDragVisual();
 
         draggedCard = null;
 
@@ -182,6 +187,35 @@ public class GameManager : MonoBehaviour
         if (!draggedCard.data.CanTarget(selectedCell))
             return;
 
-        draggedCard.data.ApplyEffect(selectedCell);
+        IsPlayingCard = true;
+
+        CardPlayer.Instance.Play(draggedCard.data, selectedCell);
+    }
+
+    private void OnCardFinished()
+    {
+        IsPlayingCard = false;
+
+        if (draggedCard == null)
+            return;
+
+        Card card = draggedCard;
+
+        ClearDraggedCard();
+
+        CardManager.Instance.RemoveCard(card);
+
+        selectedCell = null;
+    }
+
+    public void EndGame()
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        if (CardPlayer.Instance != null)
+            CardPlayer.Instance.Finished -= OnCardFinished;
     }
 }

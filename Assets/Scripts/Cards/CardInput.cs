@@ -34,6 +34,12 @@ public class CardInput : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance.IsPlayingCard)
+            return;
+
+        if (TurnManager.Instance.IsProcessingPlayerPhase)
+            return;
+
         GameManager.Instance.BeginCardDrag(card);
     }
 

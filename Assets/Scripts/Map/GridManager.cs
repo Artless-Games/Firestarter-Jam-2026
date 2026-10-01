@@ -107,7 +107,7 @@ public class GridManager : MonoBehaviour
 
                 Cell cell = Instantiate(
                     cellPrefab,
-                    position,
+                    position + transform.position,
                     Quaternion.identity,
                     transform
                 );
