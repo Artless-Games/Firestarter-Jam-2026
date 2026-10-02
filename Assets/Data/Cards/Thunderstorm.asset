@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0844e0611b7af6418e4c2a5eae4bc5e, type: 3}
+  m_Name: Thunderstorm
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  cost: 0
+  damageData:
+    minDamage: 0
+    maxDamage: 0
+  target: {fileID: 0}
+  area: {fileID: 0}
+  damageType: {fileID: 0}
+  effects: []
+  vfx: {fileID: 0}
+  sfx: {fileID: 0}

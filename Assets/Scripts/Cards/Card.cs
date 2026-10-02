@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(RectTransform))]
 public class Card : MonoBehaviour
 {
     public CardData data;
@@ -7,6 +9,8 @@ public class Card : MonoBehaviour
     public float pointedScale = 1.5f;
     public float dragScale = 0.5f;
     public float animationSpeed = 10f;
+    public float fullscreenScaleMultiplier = 2.5f;
+    public float fullscreenAnimationSpeed = 8f;
 
     private RectTransform rectTransform;
 
@@ -16,10 +20,14 @@ public class Card : MonoBehaviour
 
     private bool isPointed;
     private bool isDragged;
+    private bool isFullscreen;
 
     private Vector2 targetPosition;
     private float targetRotation;
     private float targetScale = 1f;
+    private Vector2 fullscreenPosition;
+    private Vector3 fullscreenScale;
+    private float fullscreenRotation;
 
     private void Awake()
     {
@@ -29,6 +37,9 @@ public class Card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isFullscreen)
+            return;
+
         if (!isDragged)
         {
             rectTransform.anchoredPosition = Vector2.Lerp(
@@ -110,6 +121,79 @@ public class Card : MonoBehaviour
     public void EndDragVisual()
     {
         transform.SetSiblingIndex(originalSiblingIndex);
+    }
+
+    public IEnumerator ShowFullscreen(float duration)
+    {
+        originalSiblingIndex = transform.GetSiblingIndex();
+        transform.SetAsLastSibling();
+
+        Canvas canvas = GetComponentInParent<Canvas>();
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+
+        Vector3 canvasCenterWorld =
+            canvasRect.TransformPoint(canvasRect.rect.center);
+
+        Vector2 targetPosition =
+            rectTransform.parent.InverseTransformPoint(canvasCenterWorld);
+
+        Vector2 startPosition = rectTransform.anchoredPosition;
+        Vector3 startScale = rectTransform.localScale;
+        Quaternion startRotation = rectTransform.localRotation;
+
+        Vector3 targetScale =
+            Vector3.one * fullscreenScaleMultiplier;
+
+        isFullscreen = true;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            rectTransform.anchoredPosition =
+                Vector2.Lerp(startPosition, targetPosition, t);
+
+            rectTransform.localScale =
+                Vector3.Lerp(startScale, targetScale, t);
+
+            rectTransform.localRotation =
+                Quaternion.Lerp(
+                    startRotation,
+                    Quaternion.identity,
+                    t
+                );
+
+            yield return null;
+        }
+
+        rectTransform.anchoredPosition = targetPosition;
+        rectTransform.localScale = targetScale;
+        rectTransform.localRotation = Quaternion.identity;
+    }
+
+    public IEnumerator HideFullscreen(float duration)
+    {
+        if (!TryGetComponent<CanvasGroup>(out var canvasGroup))
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            canvasGroup.alpha = 1f - t;
+
+            yield return null;
+        }
+
+        canvasGroup.alpha = 0f;
     }
 
     private void UpdateTarget()

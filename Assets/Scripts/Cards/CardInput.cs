@@ -18,7 +18,9 @@ public class CardInput : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (GameManager.Instance.IsDraggingCard)
+        if (GameManager.Instance.IsDraggingCard ||
+            GameManager.Instance.IsPlayingCard ||
+            TurnManager.Instance.IsProcessingPlayerPhase)
             return;
 
         GameManager.Instance.PointCard(card);
@@ -26,7 +28,9 @@ public class CardInput : MonoBehaviour,
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (GameManager.Instance.IsDraggingCard)
+        if (GameManager.Instance.IsDraggingCard ||
+            GameManager.Instance.IsPlayingCard ||
+            TurnManager.Instance.IsProcessingPlayerPhase)
             return;
 
         GameManager.Instance.ClearPointedCard();
@@ -34,10 +38,8 @@ public class CardInput : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (GameManager.Instance.IsPlayingCard)
-            return;
-
-        if (TurnManager.Instance.IsProcessingPlayerPhase)
+        if (GameManager.Instance.IsPlayingCard ||
+            TurnManager.Instance.IsProcessingPlayerPhase)
             return;
 
         GameManager.Instance.BeginCardDrag(card);
@@ -45,11 +47,19 @@ public class CardInput : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance.IsPlayingCard ||
+            TurnManager.Instance.IsProcessingPlayerPhase)
+            return;
+
         GameManager.Instance.DragCard(eventData.position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance.IsPlayingCard ||
+            TurnManager.Instance.IsProcessingPlayerPhase)
+            return;
+
         GameManager.Instance.EndCardDrag(eventData.position);
     }
 }

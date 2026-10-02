@@ -1,9 +1,14 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class CardPlayer : MonoBehaviour
 {
+    // Singleton
     public static CardPlayer Instance { get; private set; }
+
+    public float cardShowDuration = 0.5f;
+    public float cardDisplayTime = 0.5f;
 
     public event Action Finished;
     private Cell origin;
@@ -20,7 +25,32 @@ public class CardPlayer : MonoBehaviour
         Instance = this;
     }
 
-    public void Play(CardData cardData, Cell origin)
+    public void Play(CardData cardData, Cell origin, Card card)
+    {
+        if (cardData == null || origin == null || card == null)
+            return;
+
+        StartCoroutine(PlayRoutine(cardData, origin, card));
+    }
+
+    private IEnumerator PlayRoutine(
+        CardData cardData,
+        Cell origin,
+        Card card)
+    {
+        currentCard = cardData;
+        this.origin = origin;
+
+        yield return card.ShowFullscreen(cardShowDuration);
+
+        yield return new WaitForSeconds(cardDisplayTime);
+
+        yield return card.HideFullscreen(cardShowDuration);
+
+        PlayEffect(cardData, origin);
+    }
+
+    public void PlayEffect(CardData cardData, Cell origin)
     {
         if (cardData == null || origin == null)
             return;

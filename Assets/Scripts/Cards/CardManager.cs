@@ -7,9 +7,11 @@ public class CardManager : MonoBehaviour
 
     public Card cardPrefab;
     public CardHand cardHand;
-    public List<CardData> startingCards;
+    public List<CardData> cardPool;
+    [SerializeField] private int handSize = 5;
+    private List<CardData> deck = new();
 
-    private readonly List<Card> cards = new();
+    private readonly List<Card> handCards = new();
 
     private void Awake()
     {
@@ -25,27 +27,72 @@ public class CardManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        CreateStartingHand();
+        CreateDeck();
     }
 
-    private void CreateStartingHand()
+    public void CreateDeck()
     {
-        foreach (CardData data in startingCards)
+        deck = new List<CardData>(cardPool);
+
+        ShuffleDeck();
+    }
+
+    private void ShuffleDeck()
+    {
+        for (int i = deck.Count - 1; i > 0; i--)
         {
-            CreateCard(data);
+            int j = Random.Range(0, i + 1);
+
+            (deck[i], deck[j]) = (deck[j], deck[i]);
         }
+    }
+
+    public void DrawUpToHandSize()
+    {
+        int maxCardCost = TurnManager.Instance.MaxCardCost;
+
+        while (handCards.Count < handSize)
+        {
+            CardData cardData = DrawCard(maxCardCost);
+
+            if (cardData == null)
+                break;
+
+            CreateCard(cardData);
+        }
+    }
+
+    private CardData DrawCard(int maxCardCost)
+    {
+        List<CardData> availableCards = new();
+
+        foreach (CardData card in deck)
+        {
+            if (card.cost <= maxCardCost)
+                availableCards.Add(card);
+        }
+
+        if (availableCards.Count == 0)
+            return null;
+
+        CardData selectedCard =
+            availableCards[Random.Range(0, availableCards.Count)];
+
+        deck.Remove(selectedCard);
+
+        return selectedCard;
     }
 
     private void CreateCard(CardData data)
     {
-        if (data == null)
-            return;
-
-        Card card = Instantiate(cardPrefab, cardHand.transform);
+        Card card = Instantiate(
+            cardPrefab,
+            cardHand.transform
+        );
 
         card.data = data;
 
-        cards.Add(card);
+        handCards.Add(card);
         cardHand.AddCard(card);
     }
 
@@ -54,7 +101,7 @@ public class CardManager : MonoBehaviour
         if (card == null)
             return;
 
-        cards.Remove(card);
+        handCards.Remove(card);
         cardHand.RemoveCard(card);
 
         Destroy(card.gameObject);

@@ -955,12 +955,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
   cardPrefab: {fileID: 9116690176739423201, guid: 7189064269519d64899831d6e78f87e0, type: 3}
   cardHand: {fileID: 260776896}
-  startingCards:
+  cardPool:
   - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
   - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
   - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
   - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
   - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  - {fileID: 11400000, guid: 7ac35315b97849a49bbae5302b44a28d, type: 2}
+  handSize: 5
 --- !u!114 &1379829689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,6 +1013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce001e6e9095a0c4088805fb86bbb21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardPlayer
+  cardShowDuration: 0.5
+  cardDisplayTime: 0.5
 --- !u!1 &1572851078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,6 +1557,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurnManager
   maxTurns: 5
   endTurnButton: {fileID: 273708341}
+  playerTurnData:
+  - energy: 2
+    maxCardCost: 2
+  - energy: 4
+    maxCardCost: 3
+  - energy: 6
+    maxCardCost: 4
+  - energy: 8
+    maxCardCost: 5
+  - energy: 10
+    maxCardCost: 6
 --- !u!114 &1976062782
 MonoBehaviour:
   m_ObjectHideFlags: 0

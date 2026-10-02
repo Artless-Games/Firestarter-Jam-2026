@@ -36,6 +36,9 @@ public class Building : MonoBehaviour
 
     public bool TakeDamage(int damage)
     {
+        if (buildingManager != null)
+            buildingManager.PlayDestroyEffects(this);
+
         health -= damage;
 
         if (health <= 0)

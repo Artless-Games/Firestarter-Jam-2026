@@ -116,6 +116,7 @@ public class BuildingManager : MonoBehaviour
         int tokens = data.tokens;
         int maxCost = data.maxCost;
 
+        // Build
         while (tokens > 0)
         {
             List<Cell> availableCells = GetAvailableCells();
@@ -123,8 +124,9 @@ public class BuildingManager : MonoBehaviour
             if (availableCells.Count == 0)
                 break;
 
-            Cell cell =
-                availableCells[Random.Range(0, availableCells.Count)];
+            Cell cell = availableCells[
+                Random.Range(0, availableCells.Count)
+            ];
 
             int cost = GetBuildCost(tokens, maxCost);
 
@@ -136,7 +138,48 @@ public class BuildingManager : MonoBehaviour
             tokens -= cost;
         }
 
+        if (tokens > 0)
+        {
+            List<Cell> availableCells = GetAvailableCells();
+
+            if (availableCells.Count == 0)
+                UpgradeBuildings(tokens, maxCost);
+        }
+
         TurnManager.Instance.EndBuildingsPhase();
+    }
+
+    private void UpgradeBuildings(int tokens, int maxCost)
+    {
+        List<Building> upgradeableBuildings = new();
+
+        foreach (Building b in buildings)
+        {
+            if (b == null)
+                continue;
+
+            if (b.health < maxCost)
+                upgradeableBuildings.Add(b);
+        }
+
+        if (upgradeableBuildings.Count == 0)
+            return;
+
+        Building building =
+            upgradeableBuildings[
+                Random.Range(0, upgradeableBuildings.Count)
+            ];
+
+        int targetLevel = Mathf.Min(
+            building.health + tokens,
+            maxCost
+        );
+
+        int upgradeCost = targetLevel - building.health;
+
+        building.Upgrade(upgradeCost);
+
+        PlayBuildEffects(building);
     }
 
     private List<Cell> GetAvailableCells()
@@ -268,6 +311,31 @@ public class BuildingManager : MonoBehaviour
             AudioSource.PlayClipAtPoint(
                 buildSfx,
                 building.transform.position
+            );
+        }
+    }
+
+    public void PlayDestroyEffects(Building building)
+    {
+        if (building == null)
+            return;
+
+        Vector3 position = building.transform.position;
+
+        if (destroyVfx != null)
+        {
+            Instantiate(
+                destroyVfx,
+                position,
+                Quaternion.identity
+            );
+        }
+
+        if (destroySfx != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                destroySfx,
+                position
             );
         }
     }

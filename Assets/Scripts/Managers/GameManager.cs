@@ -187,9 +187,20 @@ public class GameManager : MonoBehaviour
         if (!draggedCard.data.CanTarget(selectedCell))
             return;
 
+        if (draggedCard.data.cost > TurnManager.Instance.Energy)
+            return;
+
+        TurnManager.Instance.SpendEnergy(
+            draggedCard.data.cost
+        );
+
         IsPlayingCard = true;
 
-        CardPlayer.Instance.Play(draggedCard.data, selectedCell);
+        CardPlayer.Instance.Play(
+            draggedCard.data,
+            selectedCell,
+            draggedCard
+        );
     }
 
     private void OnCardFinished()
@@ -204,6 +215,8 @@ public class GameManager : MonoBehaviour
         ClearDraggedCard();
 
         CardManager.Instance.RemoveCard(card);
+
+        gridHighlight.Clear();
 
         selectedCell = null;
     }

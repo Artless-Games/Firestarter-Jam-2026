@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +15,21 @@ public class TurnManager : MonoBehaviour
         Player
     }
 
+    [Serializable]
+    public class PlayerTurnData
+    {
+        public int energy;
+        public int maxCardCost;
+    }
+
     public int maxTurns = 5;
     public Button endTurnButton;
+
+    [SerializeField]
+    private List<PlayerTurnData> playerTurnData;
+
+    public int Energy { get; private set; }
+    public int MaxCardCost { get; private set; }
 
     public TurnPhase Phase { get; private set; }
     public int Turn { get; private set; } = 1;
@@ -84,11 +99,27 @@ public class TurnManager : MonoBehaviour
         endTurnButton.interactable = false;
 
         yield return BuildingManager.Instance.ProcessFires();
-
         yield return LineEffectManager.Instance.ProcessEffects();
+
+        PlayerTurnData data =
+            playerTurnData[Turn - 1];
+
+        Energy = data.energy;
+        MaxCardCost = data.maxCardCost;
+
+        CardManager.Instance.DrawUpToHandSize();
 
         IsProcessingPlayerPhase = false;
         endTurnButton.interactable = true;
+    }
+
+    public bool SpendEnergy(int amount)
+    {
+        if (amount > Energy)
+            return false;
+
+        Energy -= amount;
+        return true;
     }
 
     public void EndPlayerPhase()

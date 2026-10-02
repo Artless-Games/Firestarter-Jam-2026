@@ -166,6 +166,8 @@ MonoBehaviour:
   pointedScale: 1.5
   dragScale: 0.5
   animationSpeed: 10
+  fullscreenScaleMultiplier: 2
+  fullscreenAnimationSpeed: 8
 --- !u!114 &656749180876043126
 MonoBehaviour:
   m_ObjectHideFlags: 0
