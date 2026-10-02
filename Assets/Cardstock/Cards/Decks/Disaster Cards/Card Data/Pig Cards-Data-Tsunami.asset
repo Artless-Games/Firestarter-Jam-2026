@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d6e7bffe46f9b30b5aec9bcc0ac652, type: 3}
+  m_Name: Pig Cards-Data-Tsunami
+  m_EditorClassIdentifier:
+  cardId: c_eee0d40d4914d247
+  cardName: Tsunami
+  description: ""
+  copies: 2
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 0}
+  globals: {fileID: 11400000, guid: dc10ad8018ddc2557f82de24ff2d5e1f, type: 2}
+  variables: {fileID: 11400000, guid: 62e3bb4e8ce6f839e68a23a043407d87, type: 2}
+  cardPrefab: {fileID: 7388356684575570043, guid: d01582862b1ad99241b1c367b2e7089e, type: 3}
+  uiPrefab: {fileID: 7388356684575570043, guid: 9f025db5cf21dcf91fe4fb6d323e83f2, type: 3}
+  v_cab0db0d: "Inflict <b>3 DMG</b> to buildings on the left side of the affected area. Inner buildings will receive less damage."
+  v_76ea4a26: {r: 0.9686, g: 0.5804, b: 0.1647, a: 1}
+  v_3807e429: "\"7.8 - too much water\""
+  v_a32778a2: {fileID: 21300000, guid: 51255567f2310cd8cd4013a2dbd7a245, type: 3}
+  v_7b86f1f1: Tsunami
+  v_b184cd72: 4

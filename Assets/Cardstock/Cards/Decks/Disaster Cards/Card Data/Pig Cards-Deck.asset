@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9656cc509de3fc0d52edad8e1a46419, type: 3}
+  m_Name: Pig Cards-Deck
+  m_EditorClassIdentifier:
+  deckId: dd5f1863-e4d1-4684-a683-03ec23e6f4fa
+  deckName: Pig Cards
+  cardBasePrefab: {fileID: 100100000, guid: 8bef62696f56dde4e806aa05b093322c, type: 3}
+  cards:
+  - {fileID: 11400000, guid: e2a4f7e1cc06e1f0d613e3133e81ec0d, type: 2}
+  - {fileID: 11400000, guid: c19c8c8242f836df691ace1f8a906a2a, type: 2}
+  - {fileID: 11400000, guid: af875b7cb585cca3f36e8f19e92b7640, type: 2}
+  - {fileID: 11400000, guid: acc853a6e77bf6794b3633d0466be2cd, type: 2}
+  - {fileID: 11400000, guid: e850ccf1bc025f6ee72ca42b28806717, type: 2}
+  - {fileID: 11400000, guid: db5041bf54546e420f40fae83538faeb, type: 2}
+  - {fileID: 11400000, guid: 684c665e106aa50b18ac173d723c256d, type: 2}
+  - {fileID: 11400000, guid: 8884a0749feb1c4f66065dbf5c63b964, type: 2}
+  - {fileID: 11400000, guid: e1ab544caaf38ac3131622edd1352d4e, type: 2}
+  - {fileID: 11400000, guid: fe9232411895d33e8370bb7d2c9f46b5, type: 2}
+  - {fileID: 11400000, guid: 6342eafbf6d090765b0d530539fc5d62, type: 2}
+  - {fileID: 11400000, guid: ba83943d6414c367fb02b7e3ad282ec8, type: 2}
+  - {fileID: 11400000, guid: 860ccf951659665c87b1e7b28b2d87f3, type: 2}
+  - {fileID: 11400000, guid: 5b7d208d1650eb05ebe8736923cb2072, type: 2}
+  - {fileID: 11400000, guid: 10df6907714a03549ed71304e4f5e691, type: 2}
+  - {fileID: 11400000, guid: 2184eb2a3d42a28f5bf1b9a86e79d1d0, type: 2}
+  - {fileID: 11400000, guid: c3b7896ecf56880822d2e99f6bd40321, type: 2}

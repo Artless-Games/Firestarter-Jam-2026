@@ -16,10 +16,10 @@ MonoBehaviour:
   damageData:
     minDamage: 1
     maxDamage: 1
-  target: {fileID: 11400000, guid: 0759cca6ef5f37e4ba277fb0798a4f72, type: 2}
-  area: {fileID: 11400000, guid: 3d024d394ac2c1b469eef885d19c92ed, type: 2}
-  damageType: {fileID: 11400000, guid: 3b781bde6ac5aac4189ec84f50f93b08, type: 2}
+  target: {fileID: 11400000, guid: 19ac41449895f2d4287aa452ce8198d6, type: 2}
+  area: {fileID: 11400000, guid: a880d8671b7782446841ba92e7348e33, type: 2}
+  damageType: {fileID: 11400000, guid: ad4735811ab3a954f81b506dddca8dc8, type: 2}
   effects:
   - {fileID: 11400000, guid: b81a416e842134b45b8d098aea0ddbe8, type: 2}
-  vfx: {fileID: 0}
-  sfx: {fileID: 0}
+  vfx: {fileID: 8294947810415399850, guid: 7a16f43b4abbc0846a15aa17f7ba39bd, type: 3}
+  sfx: {fileID: 8300000, guid: c39221e1dfaacb640a93d572c01fb555, type: 3}

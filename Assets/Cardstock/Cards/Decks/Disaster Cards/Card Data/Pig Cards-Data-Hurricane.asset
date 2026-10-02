@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d6e7bffe46f9b30b5aec9bcc0ac652, type: 3}
+  m_Name: Pig Cards-Data-Hurricane
+  m_EditorClassIdentifier:
+  cardId: c_fc3d175e74f157b4
+  cardName: Hurricane
+  description: ""
+  copies: 2
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 0}
+  globals: {fileID: 11400000, guid: dc10ad8018ddc2557f82de24ff2d5e1f, type: 2}
+  variables: {fileID: 11400000, guid: 62e3bb4e8ce6f839e68a23a043407d87, type: 2}
+  cardPrefab: {fileID: 7388356684575570043, guid: 4eb8f52c39b273c31a17a6239f082029, type: 3}
+  uiPrefab: {fileID: 7388356684575570043, guid: 7948358fd63d1a665d686be99e066990, type: 3}
+  v_cab0db0d: "Inflict <b>3 DMG</b> to all buildings affected.<br><b>AT THE START OF THE NEXT TURN: </b> The Hurricane will continue its path in a line, dealing damage to buildings it encounters."
+  v_76ea4a26: {r: 0.902, g: 0.2549, b: 0.1686, a: 1}
+  v_3807e429: "\"Beauty is in the eye of the hurricane\""
+  v_a32778a2: {fileID: 21300000, guid: da67a91cd1a9d63c5f9ab8e7624a0c90, type: 3}
+  v_7b86f1f1: Hurricane
+  v_b184cd72: 3

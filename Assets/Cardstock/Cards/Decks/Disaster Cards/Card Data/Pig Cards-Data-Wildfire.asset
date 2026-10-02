@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d6e7bffe46f9b30b5aec9bcc0ac652, type: 3}
+  m_Name: Pig Cards-Data-Wildfire
+  m_EditorClassIdentifier:
+  cardId: c_0871395033d82baa
+  cardName: Wildfire
+  description: ""
+  copies: 3
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 0}
+  globals: {fileID: 11400000, guid: dc10ad8018ddc2557f82de24ff2d5e1f, type: 2}
+  variables: {fileID: 11400000, guid: 62e3bb4e8ce6f839e68a23a043407d87, type: 2}
+  cardPrefab: {fileID: 7388356684575570043, guid: 06011506b9c75acfa7db39cfb62e04a9, type: 3}
+  uiPrefab: {fileID: 7388356684575570043, guid: 49f36354c3664bd9db09d66d9960bb00, type: 3}
+  v_cab0db0d: "Inflict <b>2 DMG</b> to all buildings affected.<br><b>AT THE END OF THE TURN: </b> The fire propagates to all nearing buildings, damaging them too."
+  v_76ea4a26: {r: 0.3608, g: 0.298, b: 0.6863, a: 1}
+  v_3807e429: "“Everything’s fine”"
+  v_a32778a2: {fileID: 21300000, guid: 375f3290feb9827315a134066c29dba4, type: 3}
+  v_7b86f1f1: Wildfire
+  v_b184cd72: 1

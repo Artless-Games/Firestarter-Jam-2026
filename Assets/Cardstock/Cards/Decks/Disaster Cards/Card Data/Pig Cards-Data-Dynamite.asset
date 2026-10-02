@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d6e7bffe46f9b30b5aec9bcc0ac652, type: 3}
+  m_Name: Pig Cards-Data-Dynamite
+  m_EditorClassIdentifier:
+  cardId: c_f7f436a6d9393c8c
+  cardName: Dynamite
+  description: ""
+  copies: 3
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 0}
+  globals: {fileID: 11400000, guid: dc10ad8018ddc2557f82de24ff2d5e1f, type: 2}
+  variables: {fileID: 11400000, guid: 62e3bb4e8ce6f839e68a23a043407d87, type: 2}
+  cardPrefab: {fileID: 7388356684575570043, guid: a3d180f3b60fd2ebcddda61b6f637ee6, type: 3}
+  uiPrefab: {fileID: 7388356684575570043, guid: ee643b39a9c2cf20fe159fbfafc9ad22, type: 3}
+  v_cab0db0d: "Inflict <b>1 DMG</b> to all buildings affected"
+  v_76ea4a26: {r: 0.3608, g: 0.298, b: 0.6863, a: 1}
+  v_3807e429: "\"A coyote was harmed in the making of this card\""
+  v_a32778a2: {fileID: 21300000, guid: 2e3958d891a09a38e4410b69373343ca, type: 3}
+  v_7b86f1f1: Dynamite
+  v_b184cd72: 1
