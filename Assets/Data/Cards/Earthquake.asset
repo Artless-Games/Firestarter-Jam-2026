@@ -15,11 +15,10 @@ MonoBehaviour:
   cost: 0
   damageData:
     minDamage: 1
-    maxDamage: 1
-  target: {fileID: 11400000, guid: 19ac41449895f2d4287aa452ce8198d6, type: 2}
-  area: {fileID: 11400000, guid: a880d8671b7782446841ba92e7348e33, type: 2}
-  damageType: {fileID: 11400000, guid: ad4735811ab3a954f81b506dddca8dc8, type: 2}
-  effects:
-  - {fileID: 11400000, guid: b81a416e842134b45b8d098aea0ddbe8, type: 2}
+    maxDamage: 3
+  target: {fileID: 11400000, guid: 7b0e9affcfada6e449789e768b7f5061, type: 2}
+  area: {fileID: 11400000, guid: ea9290ed5fe703f4ab60b2f852ac9ec1, type: 2}
+  damageType: {fileID: 11400000, guid: 823eb78a8b2639048a06a7a20e29c4dd, type: 2}
+  effects: []
   vfx: {fileID: 8294947810415399850, guid: 7a16f43b4abbc0846a15aa17f7ba39bd, type: 3}
   sfx: {fileID: 8300000, guid: c39221e1dfaacb640a93d572c01fb555, type: 3}

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Building : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class Building : MonoBehaviour
     public Cell Cell { get; private set; }
     public bool IsOnFire { get; private set; }
     public int FireDamage { get; private set; }
+    public Transform modelParent;
     private GameObject fireVfxPrefab;
     private GameObject fireVfx;
 
@@ -23,6 +23,17 @@ public class Building : MonoBehaviour
         this.buildingManager = buildingManager;
     }
 
+    public void SetHealth(int value)
+    {
+        health = Mathf.Clamp(value, 1, 5);
+    }
+
+    public void Upgrade(int amount)
+    {
+        SetHealth(health + amount);
+        buildingManager.UpdateBuildingModel(this);
+    }
+
     public bool TakeDamage(int damage)
     {
         health -= damage;
@@ -32,6 +43,8 @@ public class Building : MonoBehaviour
             DestroyBuilding();
             return true;
         }
+
+        buildingManager.UpdateBuildingModel(this);
 
         return false;
     }

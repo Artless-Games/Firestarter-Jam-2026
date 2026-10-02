@@ -38,8 +38,10 @@ public class CardPlayer : MonoBehaviour
                 Quaternion.identity);
 
             
-            if (vfx.TryGetComponent(out CardVFX cardVFX))
-                cardVFX.Finished += OnVFXFinished;
+            if (!vfx.TryGetComponent<CardVFX>(out var cardVFX))
+                cardVFX = vfx.AddComponent<CardVFX>();
+
+            cardVFX.Finished += OnVFXFinished;
         }
 
         cardData.ApplyEffect(origin, vfx);

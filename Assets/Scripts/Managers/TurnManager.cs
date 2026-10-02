@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TurnManager : MonoBehaviour
     }
 
     public int maxTurns = 5;
+    public Button endTurnButton;
 
     public TurnPhase Phase { get; private set; }
     public int Turn { get; private set; } = 1;
@@ -31,6 +33,7 @@ public class TurnManager : MonoBehaviour
 
     void Start()
     {
+        endTurnButton.interactable = false;
         StartTurn();
     }
 
@@ -57,6 +60,8 @@ public class TurnManager : MonoBehaviour
 
     private void StartBuildingsPhase()
     {
+        endTurnButton.interactable = false;
+
         BuildingManager.Instance.ProcessTurn();
     }
 
@@ -76,12 +81,14 @@ public class TurnManager : MonoBehaviour
     private IEnumerator StartPlayerPhaseRoutine()
     {
         IsProcessingPlayerPhase = true;
+        endTurnButton.interactable = false;
 
         yield return BuildingManager.Instance.ProcessFires();
 
         yield return LineEffectManager.Instance.ProcessEffects();
 
         IsProcessingPlayerPhase = false;
+        endTurnButton.interactable = true;
     }
 
     public void EndPlayerPhase()
