@@ -112,7 +112,7 @@ public class GridManager : MonoBehaviour
                     transform
                 );
 
-                cell.Initialize(cellSize, new Vector2Int(x, z), terrain, true, false);
+                cell.Initialize(cellSize, new Vector2Int(x, z), terrain, true, x == 0);
 
                 cells[x, z] = cell;
             }

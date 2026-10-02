@@ -137,12 +137,24 @@ public class TurnManager : MonoBehaviour
     {
         if (Turn == maxTurns)
         {
-            GameManager.Instance.EndGame();
+            CheckEndGame();
         }
         else
         {
             Turn++;
             StartTurn();
+        }
+    }
+
+    private void CheckEndGame()
+    {
+        if (BuildingManager.Instance.HasBuildings())
+        {
+            GameManager.Instance.EndGame(false);
+        }
+        else
+        {
+            GameManager.Instance.EndGame(true);
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GridInput gridInput;
     public GridHighlight gridHighlight;
     public CameraController cameraController;
+    [SerializeField] private GameObject endGamePanel;
+    [SerializeField] private TMP_Text resultText;
 
     private Card pointedCard;
     private Card draggedCard;
@@ -19,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsDraggingCard => draggedCard != null;
     public bool IsPlayingCard { get; private set; }
+    public bool IsGameOver { get; private set; }
 
 
     private void Awake()
@@ -188,7 +193,12 @@ public class GameManager : MonoBehaviour
             return;
 
         if (draggedCard.data.cost > TurnManager.Instance.Energy)
+        {
+            ClearDraggedCard();
+            gridHighlight.Clear();
+            selectedCell = null;
             return;
+        }
 
         TurnManager.Instance.SpendEnergy(
             draggedCard.data.cost
@@ -221,9 +231,22 @@ public class GameManager : MonoBehaviour
         selectedCell = null;
     }
 
-    public void EndGame()
+    public void EndGame(bool victory)
     {
+        IsGameOver = true;
 
+        endGamePanel.SetActive(true);
+
+        resultText.text = victory
+            ? "You win!"
+            : "You lose!";
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 
     private void OnDestroy()

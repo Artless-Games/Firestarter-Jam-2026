@@ -45,6 +45,11 @@ public class BuildingManager : MonoBehaviour
         return buildings;
     }
 
+    public bool HasBuildings()
+    {
+        return buildings.Count > 0;
+    }
+
     public void RemoveBuilding(Building building)
     {
         if (building == null)

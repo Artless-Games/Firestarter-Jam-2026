@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0844e0611b7af6418e4c2a5eae4bc5e, type: 3}
-  m_Name: Earthquake
+  m_Name: Tsunami
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cost: 1
+  cost: 4
   damageData:
     minDamage: 1
     maxDamage: 3
-  target: {fileID: 11400000, guid: 7b0e9affcfada6e449789e768b7f5061, type: 2}
-  area: {fileID: 11400000, guid: 53ac48acf8e2681478f7fd24289a725b, type: 2}
-  damageType: {fileID: 11400000, guid: 823eb78a8b2639048a06a7a20e29c4dd, type: 2}
+  target: {fileID: 11400000, guid: 395abb651c301904ea62862873fc6619, type: 2}
+  area: {fileID: 11400000, guid: a880d8671b7782446841ba92e7348e33, type: 2}
+  damageType: {fileID: 11400000, guid: ad4735811ab3a954f81b506dddca8dc8, type: 2}
   effects: []
-  vfx: {fileID: 0}
-  sfx: {fileID: 8300000, guid: 919fb0e9ab9f6df4b9d4d0910207e15e, type: 3}
+  vfx: {fileID: 8294947810415399850, guid: 7a16f43b4abbc0846a15aa17f7ba39bd, type: 3}
+  sfx: {fileID: 8300000, guid: c39221e1dfaacb640a93d572c01fb555, type: 3}

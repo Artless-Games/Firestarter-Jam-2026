@@ -20,7 +20,8 @@ public class CardInput : MonoBehaviour,
     {
         if (GameManager.Instance.IsDraggingCard ||
             GameManager.Instance.IsPlayingCard ||
-            TurnManager.Instance.IsProcessingPlayerPhase)
+            TurnManager.Instance.IsProcessingPlayerPhase ||
+            GameManager.Instance.IsGameOver)
             return;
 
         GameManager.Instance.PointCard(card);
@@ -30,7 +31,8 @@ public class CardInput : MonoBehaviour,
     {
         if (GameManager.Instance.IsDraggingCard ||
             GameManager.Instance.IsPlayingCard ||
-            TurnManager.Instance.IsProcessingPlayerPhase)
+            TurnManager.Instance.IsProcessingPlayerPhase ||
+            GameManager.Instance.IsGameOver)
             return;
 
         GameManager.Instance.ClearPointedCard();
@@ -39,7 +41,8 @@ public class CardInput : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.IsPlayingCard ||
-            TurnManager.Instance.IsProcessingPlayerPhase)
+            TurnManager.Instance.IsProcessingPlayerPhase ||
+            GameManager.Instance.IsGameOver)
             return;
 
         GameManager.Instance.BeginCardDrag(card);
@@ -48,7 +51,8 @@ public class CardInput : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.IsPlayingCard ||
-            TurnManager.Instance.IsProcessingPlayerPhase)
+            TurnManager.Instance.IsProcessingPlayerPhase ||
+            GameManager.Instance.IsGameOver)
             return;
 
         GameManager.Instance.DragCard(eventData.position);
@@ -57,7 +61,8 @@ public class CardInput : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData)
     {
         if (GameManager.Instance.IsPlayingCard ||
-            TurnManager.Instance.IsProcessingPlayerPhase)
+            TurnManager.Instance.IsProcessingPlayerPhase ||
+            GameManager.Instance.IsGameOver)
             return;
 
         GameManager.Instance.EndCardDrag(eventData.position);

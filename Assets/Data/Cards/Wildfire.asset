@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0844e0611b7af6418e4c2a5eae4bc5e, type: 3}
   m_Name: Wildfire
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cost: 0
+  cost: 1
   damageData:
-    minDamage: 0
-    maxDamage: 0
-  target: {fileID: 0}
-  area: {fileID: 0}
-  damageType: {fileID: 0}
-  effects: []
+    minDamage: 2
+    maxDamage: 2
+  target: {fileID: 11400000, guid: 0759cca6ef5f37e4ba277fb0798a4f72, type: 2}
+  area: {fileID: 11400000, guid: 3d024d394ac2c1b469eef885d19c92ed, type: 2}
+  damageType: {fileID: 11400000, guid: 3b781bde6ac5aac4189ec84f50f93b08, type: 2}
+  effects:
+  - {fileID: 11400000, guid: 0d046bec02920ac4fa2fd88dde2e1767, type: 2}
   vfx: {fileID: 0}
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 8f5c7d0d680114048aa06bdfbb32433b, type: 3}

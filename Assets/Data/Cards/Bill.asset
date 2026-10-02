@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0844e0611b7af6418e4c2a5eae4bc5e, type: 3}
-  m_Name: Earthquake
+  m_Name: Bill
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  cost: 1
+  cost: 2
   damageData:
     minDamage: 1
-    maxDamage: 3
+    maxDamage: 1
   target: {fileID: 11400000, guid: 7b0e9affcfada6e449789e768b7f5061, type: 2}
-  area: {fileID: 11400000, guid: 53ac48acf8e2681478f7fd24289a725b, type: 2}
-  damageType: {fileID: 11400000, guid: 823eb78a8b2639048a06a7a20e29c4dd, type: 2}
+  area: {fileID: 11400000, guid: 3c004368141424e4685d59e582bc3214, type: 2}
+  damageType: {fileID: 11400000, guid: 3b781bde6ac5aac4189ec84f50f93b08, type: 2}
   effects: []
   vfx: {fileID: 0}
-  sfx: {fileID: 8300000, guid: 919fb0e9ab9f6df4b9d4d0910207e15e, type: 3}
+  sfx: {fileID: 8300000, guid: 136ad8ad758d1634f9c6715729aea1c6, type: 3}

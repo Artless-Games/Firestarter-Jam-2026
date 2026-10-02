@@ -12,6 +12,7 @@ public class CardManager : MonoBehaviour
     private List<CardData> deck = new();
 
     private readonly List<Card> handCards = new();
+    public int DeckCount => deck.Count;
 
     private void Awake()
     {
