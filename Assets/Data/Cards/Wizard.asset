@@ -20,5 +20,6 @@ MonoBehaviour:
   area: {fileID: 11400000, guid: 98ad629aca82d324abee79f4e89430e7, type: 2}
   damageType: {fileID: 11400000, guid: 3b781bde6ac5aac4189ec84f50f93b08, type: 2}
   effects: []
-  vfx: {fileID: 0}
+  image: {fileID: 7388356684575570043, guid: 55356ff89a75e747294a35e5d8a88c3b, type: 3}
+  vfx: {fileID: 5635953416619234777, guid: 54b02eb8855fad9468b0971332011f3a, type: 3}
   sfx: {fileID: 8300000, guid: bf1a7530fe4547543b13b845d0fb686d, type: 3}

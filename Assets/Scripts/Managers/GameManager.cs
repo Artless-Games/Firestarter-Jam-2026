@@ -249,6 +249,11 @@ public class GameManager : MonoBehaviour
         );
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
     private void OnDestroy()
     {
         if (CardPlayer.Instance != null)

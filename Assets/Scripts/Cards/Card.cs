@@ -11,6 +11,7 @@ public class Card : MonoBehaviour
     public float animationSpeed = 10f;
     public float fullscreenScaleMultiplier = 2.5f;
     public float fullscreenAnimationSpeed = 8f;
+    [SerializeField] private Transform visualTransform;
 
     private RectTransform rectTransform;
 
@@ -62,6 +63,17 @@ public class Card : MonoBehaviour
         );
     }
 
+    public void UpdateCard()
+    {
+        if (data == null || data.image == null)
+            return;
+
+        Instantiate(
+            data.image,
+            visualTransform
+        );
+    }
+
     public void SetHandPosition(Vector2 position, float rotation)
     {
         initialPosition = position;
@@ -95,6 +107,17 @@ public class Card : MonoBehaviour
     public void OnPoint(bool active)
     {
         isPointed = active;
+
+        if (active)
+        {
+            originalSiblingIndex = transform.GetSiblingIndex();
+            transform.SetAsLastSibling();
+        }
+        else
+        {
+            transform.SetSiblingIndex(originalSiblingIndex);
+        }
+
         UpdateTarget();
     }
 
@@ -210,6 +233,7 @@ public class Card : MonoBehaviour
         if (isPointed)
         {
             targetPosition.y += pointedHeight;
+            targetRotation = 0f;
             targetScale = pointedScale;
         }
         else

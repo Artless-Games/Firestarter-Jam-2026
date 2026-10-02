@@ -15,6 +15,7 @@ public class CardData : ScriptableObject
     public List<CardEffect> effects = new();
 
     [Header("Presentation")]
+    public GameObject image;
     public GameObject vfx;
     public AudioClip sfx;
 

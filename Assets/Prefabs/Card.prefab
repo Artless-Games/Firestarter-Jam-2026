@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3677963365261972234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -100,8 +100,8 @@ RectTransform:
   m_GameObject: {fileID: 6418748489635073734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3677963365261972234}
   m_Father: {fileID: 6818475621271033485}
@@ -162,12 +162,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Card
   data: {fileID: 0}
-  pointedHeight: 125
-  pointedScale: 1.5
+  pointedHeight: 300
+  pointedScale: 2
   dragScale: 0.5
   animationSpeed: 10
   fullscreenScaleMultiplier: 2
   fullscreenAnimationSpeed: 8
+  visualTransform: {fileID: 3122393416957382874}
 --- !u!114 &656749180876043126
 MonoBehaviour:
   m_ObjectHideFlags: 0

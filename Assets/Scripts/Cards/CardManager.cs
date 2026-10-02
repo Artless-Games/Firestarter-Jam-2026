@@ -92,6 +92,7 @@ public class CardManager : MonoBehaviour
         );
 
         card.data = data;
+        card.UpdateCard();
 
         handCards.Add(card);
         cardHand.AddCard(card);

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a58b882074dda0d1c19bce6f5438c7, type: 3}
+  m_Name: Back-Data-Card 1
+  m_EditorClassIdentifier:
+  cardId: 216641e0-bab0-436b-9ee0-e05a3792c9f6
+  cardName: Card 1
+  description: ""
+  copies: 1
+  frontSprite: {fileID: 0}
+  backSprite: {fileID: 0}
+  globals: {fileID: 11400000, guid: dc10ad8018ddc2557f82de24ff2d5e1f, type: 2}
+  variables: {fileID: 11400000, guid: 62e3bb4e8ce6f839e68a23a043407d87, type: 2}
+  cardPrefab: {fileID: 0}
+  uiPrefab: {fileID: 7388356684575570043, guid: 4f17a69528400410dfd30f4fbcf4bbd8, type: 3}

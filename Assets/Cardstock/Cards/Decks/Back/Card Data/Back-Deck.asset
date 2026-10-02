@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9656cc509de3fc0d52edad8e1a46419, type: 3}
+  m_Name: Back-Deck
+  m_EditorClassIdentifier:
+  deckId: 2314ec07-9a52-426d-bcea-d9aad3e71325
+  deckName: Back
+  cardBasePrefab: {fileID: 100100000, guid: 6e12f6632e4e18d2cd40c6e3bf8239b8, type: 3}
+  cards:
+  - {fileID: 11400000, guid: 74c2087c274c1ea990acf9075462df11, type: 2}
